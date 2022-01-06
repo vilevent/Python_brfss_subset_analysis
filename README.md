@@ -123,7 +123,6 @@ male_mean_val = split_arr[0].mean().round(decimals=2)
 from scipy.stats import iqr
 female_iqr_val = iqr(split_arr[1])
 ```
-- This code is an alternative to using the np.percentile() function.
 
 #### Printing the output (first 5 rows)
 ```python
