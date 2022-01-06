@@ -50,7 +50,7 @@ Descriptive statistics help us summarize large amounts of data in a meaningful m
       
 #### Interpretation
 - A mean of -7.38 denotes that there is a average weight *loss* of 7.38 lbs among the group of 20,000 people.
-- With a median of -3.0 lbs, 50% of the data points are below that value.
+- With a median of -3.0 lbs, 50% of the data points fall below that value.
 - Given that the mean and median differ, it indicates that there are outliers in the weight change data. The mean is sensitive to outliers. From the scatterplot below, we can visually recognize the data points that are substantially different from the other data points.
 ```python
 plt.figure(figsize=(12, 8))
@@ -79,6 +79,27 @@ To do the analysis, we first split the NumPy array into subarrays based on the d
 split_arr = [brfss_updated[brfss_updated[:, 5] == k] for k in np.unique(brfss_updated[:, 5])]
 ```
 - `split_arr` is a list containing two ndarrays, from which we can index on.
+
+**Data related to males: `split_arr[0]`**
+```python
+array([[    1,    77,   175, ...,    70,     1,     0],
+       [    7,    31,   194, ...,    71,     1,    -9],
+       [    8,    45,   170, ...,    67,     1,    -7],
+       ...,
+       [19995,    73,   224, ...,    69,     1,     0],
+       [19997,    35,   200, ...,    73,     1,    -6],
+       [20000,    83,   170, ...,    69,     1,    -4]])
+```
+**Data related to females: `split_arr[1]`**
+```python
+array([[    2,    33,   125, ...,    64,     2,    -7],
+       [    3,    49,   105, ...,    60,     2,     0],
+       [    4,    42,   132, ...,    66,     2,    -4],
+       ...,
+       [19996,    23,   215, ...,    66,     2,   -69],
+       [19998,    57,   216, ...,    65,     2,   -22],
+       [19999,    81,   165, ...,    67,     2,     0]])
+```
 ---------------------
 
 ## Alternatives
