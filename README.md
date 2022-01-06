@@ -126,5 +126,5 @@ female_iqr_val = iqr(split_arr[1])
 
 #### Printing the output (first 5 rows)
 ```python
-print("First Five Rows of the Data:", brfss_data[:5,], sep="\n")
+print("First Five Rows of the Data:", brfss_data[:5, ], sep="\n")
 ```
