@@ -50,16 +50,7 @@ Descriptive statistics help us summarize large amounts of data in a meaningful m
       
 #### Interpretation
 - A mean of -7.38 denotes that there is a average weight *loss* of 7.38 lbs among the group of 20,000 people.
-- With a median of -3.0 lbs, 50% of the data points fall below that value.
-- Given that the mean and median differ, it indicates that there are outliers in the weight change data. The mean is sensitive to outliers. From the scatterplot below, we can visually recognize the data points that are substantially different from the other data points.
-```python
-plt.figure(figsize=(12, 8))
-sns.scatterplot(data=weight_change, color="red", alpha=0.4)
-plt.ylabel("Weight Change", fontsize=12)
-
-plt.show()
-```
-![Scatterplot](https://user-images.githubusercontent.com/96803412/148458494-b410250e-9c3e-41cf-ab47-8011e67616a2.png)
+- With a median of -3.0 lbs, **50% of the data points fall below that value**. -3.0 is the midpoint of the distribution.
 - Since mean < median, the weight change data has a left-skewed distribution. This is supported by the histogram below. Most of the weight changes are **negative**. 
 ```python
 sns.displot(data=weight_change, aspect=2, binwidth=4, color="purple")
@@ -71,7 +62,17 @@ plt.ylabel("Count", fontsize=12)
 plt.show()
 ```
 ![Histogram](https://user-images.githubusercontent.com/96803412/148448968-51849b50-8c7b-4d67-a94f-039351f00442.png)
+- Given that the mean and median differ, it indicates that there are outliers in the weight change data. The mean is sensitive to outliers. So, it is **more suitable to use the median as our measure of central tendency**. 
 
+From the scatterplot below, we can visually recognize the data points that are substantially different from the other data points.
+```python
+plt.figure(figsize=(12, 8))
+sns.scatterplot(data=weight_change, color="red", alpha=0.4)
+plt.ylabel("Weight Change", fontsize=12)
+
+plt.show()
+```
+![Scatterplot](https://user-images.githubusercontent.com/96803412/148458494-b410250e-9c3e-41cf-ab47-8011e67616a2.png)
 
 ### Analyzing the data, per gender
 To do the analysis, we first split the NumPy array into subarrays based on the distinct values within the gender column.
