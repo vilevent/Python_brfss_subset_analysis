@@ -7,6 +7,8 @@ Calculating **measures of central tendency** (such as mean and median) and **mea
 ### Libraries used
 ```python
 import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
 ```
 
 ### Dataset at a glance
@@ -23,9 +25,61 @@ import numpy as np
 ```python
 brfss_data = np.genfromtxt('brfss-cdc.csv', dtype=np.int32, delimiter=',', skip_header=1)
 ```
-### Exploration of data
+##### Note: The CSV file named brfss-cdc should be located in the same folder as the Python file
+
+### Adding a calculated column to 2D ndarray
+- Weight change is defined as the difference between current weight and weight a year ago.
+```python
+weight_change = brfss_data[:, 2] - brfss_data[:, 3]
+brfss_updated = np.column_stack((brfss_data, weight_change))
+```
+
+### Exploration of the dataset
 Descriptive statistics help us summarize large amounts of data in a meaningful manner.
 
+
+#### Descriptive statistics for the new `weight_change` attribute
+
+      Mean: -7.38
+
+      Median: -3.0
+
+      Standard Deviation: 14.68
+
+      Interquartile Range: 10.0
+      
+#### Interpretation
+- A mean of -7.38 denotes that there is a average weight *loss* of 7.38 lbs among the group of 20,000 people.
+- With a median of -3.0 lbs, 50% of the data points are below that value.
+- Given that the mean and median differ, it indicates that there are outliers in the weight change data. The mean is sensitive to outliers. From the scatterplot below, we can visually recognize the data points that are substantially different from the other data points.
+```python
+plt.figure(figsize=(12, 8))
+sns.scatterplot(data=weight_change, color="red", alpha=0.4)
+plt.ylabel("Weight Change", fontsize=12)
+
+plt.show()
+```
+![Scatterplot](https://user-images.githubusercontent.com/96803412/148458494-b410250e-9c3e-41cf-ab47-8011e67616a2.png)
+- Since mean < median, the weight change data has a left-skewed distribution. This is supported by the histogram below. Most of the weight changes are **negative**. 
+```python
+sns.displot(data=weight_change, aspect=2, binwidth=4, color="purple")
+plt.xlim(-115, 60)
+plt.ylim(0, 7000)
+plt.xlabel("Weight Change", fontsize=12)
+plt.ylabel("Count", fontsize=12)
+
+plt.show()
+```
+![Histogram](https://user-images.githubusercontent.com/96803412/148448968-51849b50-8c7b-4d67-a94f-039351f00442.png)
+
+
+### Analyzing the data, per gender
+To do the analysis, we first split the NumPy array into subarrays based on the distinct values within the gender column.
+```python
+split_arr = [brfss_updated[brfss_updated[:, 5] == k] for k in np.unique(brfss_updated[:, 5])]
+```
+- `split_arr` is a list containing two ndarrays, from which we can index on.
+---------------------
 
 ## Alternatives
 There are other ways to complete some of the tasks like loading the data, calculating the mean of an array, and calculating the interquartile range (IQR), and printing the output to the user. The end results remain the same.
